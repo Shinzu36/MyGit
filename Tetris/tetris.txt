@@ -1,0 +1,6 @@
+burger menu						hra(tetris hudba)					login/create account
+	login/create account
+	leaderboard
+	controls
+	possible blocks
+	

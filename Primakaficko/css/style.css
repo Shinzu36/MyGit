@@ -1,0 +1,1062 @@
+/* chivo-300 - latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Chivo';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/chivo-v18-latin_latin-ext-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* chivo-regular - latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Chivo';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/chivo-v18-latin_latin-ext-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* chivo-700 - latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Chivo';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/chivo-v18-latin_latin-ext-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* playfair-display-700 - latin_latin-ext */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/playfair-display-v37-latin_latin-ext-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+body {
+    font-family: "Chivo", sans-serif;
+    background-color: #EFEFE5;
+    font-weight: 300;
+}
+
+body, input, textarea {
+    font-family: "Chivo", sans-serif;
+    font-weight: 300;
+}
+
+/*p, h1, h2, h3, h4, div, span*/
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #A58150;
+}
+
+a, h2, img, span, input, i, button {
+    transition: all .3s;
+}
+
+p {
+    font-size: 20px;
+}
+
+img {
+    vertical-align: top;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display';  
+}
+
+h1 {
+    font-size: 45px;
+    line-height: .96;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+.white {
+    background: white;
+}
+
+.container {
+    /*width: 1100px;*/
+    margin: auto;
+}
+
+@media screen and (max-width: 1199px) {
+    .container {width: 95%}
+}
+
+@media screen and (min-width: 1200px) {
+    .container {width: 1100px}
+}
+
+.headerMenu a, .headerMenu {
+    color: white;
+}
+
+.headerMenu a:hover {
+    color: #A58150;
+}
+
+.headerMenu .container {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0 260px;
+    position: relative;
+}
+
+.menu ul {
+    display: flex;
+    list-style: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    gap: 20px;
+    padding-top: 19px;
+}
+
+.menu ul li a:hover {
+    color: #A58150;
+    border-bottom: 2px solid #A58150;
+    padding-bottom: 10px;
+}
+
+.headerInfo {
+    padding-top: 11px;
+    text-align: right;
+}
+
+.headerInfo p {
+    font-size: 14px;
+    padding-bottom: 15px;
+}
+
+.headerInfo .headerTel {
+    font-size: 27px;
+    font-weight: 300;
+}
+
+.headerTel i, .tlacitka a i{
+    transition: none;
+}
+
+.headerInfo a {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 1050px) {
+    .menu ul {
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .headerMenu .container{
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 100px;
+    }
+
+    .headerInfo {
+        padding: 0;
+        text-align: center;
+    }
+
+    .menu ul {
+        gap: 20px;
+        padding: 30px 0;
+    }
+
+    .headerInfo p {
+        padding-top: 4px;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+    .menu ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu ul li a:hover {
+        border-bottom: none;
+    }
+
+}
+
+header {
+    background: url("../img/header.jpg") center no-repeat;
+    background-image: -webkit-image-set(
+        url("../img/header.jpg")  1x,
+        url("../img/header@2.jpg")  2x
+        );
+    background-image: image-set(
+        url("../img/header.jpg")  1x,
+        url("../img/header@2.jpg")  2x
+        );
+    position: relative;
+    padding-bottom: 160px;
+    background-size: cover;
+    background-position: center;
+}
+
+.kontaktHeader {
+    background-image: -webkit-image-set(
+        url("../img/kontakt-header.jpg")  1x,
+        url("../img/kontakt-header@2.jpg")  2x
+        );
+    background-image: image-set(
+        url("../img/kontakt-header.jpg")  1x,
+        url("../img/kontakt-header@2.jpg")  2x
+        );
+        height: 525px;
+}
+
+.rezervaceHeader {
+    background-image: -webkit-image-set(
+        url("../img/rezervace-header.jpg")  1x,
+        url("../img/rezervace-header@2.jpg")  2x)
+        ;
+    background-image: image-set(
+        url("../img/rezervace-header.jpg")  1x,
+        url("../img/rezervace-header@2.jpg")  2x
+        );
+    height: 525px;
+}
+
+.prazenaKavaHeader {
+    background-image: -webkit-image-set(
+        url("../img/prazenakava-header.jpg")  1x,
+        url("../img/prazenakava-header@2.jpg")  2x)
+        ;
+    background-image: image-set(
+        url("../img/prazenakava-header.jpg")  1x,
+        url("../img/prazenakava-header@2.jpg")  2x
+        );
+    height: 525px;
+}
+
+.dekujemeHeader {
+    background-image: -webkit-image-set(
+        url("../img/dekujeme-header.jpg")  1x,
+        url("../img/dekujeme-header@2.jpg")  2x)
+        ;
+    background-image: image-set(
+        url("../img/dekujeme-header.jpg")  1x,
+        url("../img/dekujeme-header@2.jpg")  2x
+        );
+    height: 525px;
+}
+
+.singleBlog {
+    height: 525px;
+}
+
+.header404 {
+    background-image: -webkit-image-set(
+        url("../img/404header.jpg")  1x,
+        url("../img/404header@2.jpg")  2x
+        );
+    background-image: image-set(
+        url("../img/404header.jpg")  1x,
+        url("../img/404header@2.jpg")  2x
+        );
+        height: 856px;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        180deg, 
+        rgba(0, 0, 0, 0.9) 0%, 
+        rgba(0, 0, 0, 0) 50%
+    );
+}
+
+@media screen and (max-width: 550px) {
+    header::before {
+        background: linear-gradient(
+        180deg, 
+        rgba(0, 0, 0, 0.9) 0%, 
+        rgba(0, 0, 0, 0) 90%
+    );
+    }
+}
+
+.headerSleva {
+    position: relative;
+    background: rgba(239, 239, 229, 0.7);
+    width: 715px;
+    padding: 45px 35px 30px 365px;
+    color: black;
+    display: inline-block;
+}
+
+.headerSleva:hover h2 {
+    color: #A58150;
+}
+
+.headerSleva:hover img {
+    transform: rotate(3deg);
+}
+
+.headerSleva img {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+.slevaText h2 {
+    padding: 8px 0 20px;
+    font-size: 45px;
+    line-height: 0.96;
+}
+
+.slevaText p {
+    padding-right: 45px;
+}
+
+@media screen and (max-width: 770px) {
+    .headerSleva {
+        width: 100%;
+        padding-right: 5px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .headerSleva img {
+        position: unset;
+        margin-bottom: 30px;
+    }
+    .headerSleva {
+        padding: 25px;
+        text-align: center;
+    }
+    .slevaText p {
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .headerSleva h2 {
+        font-size: 7vw;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .headerSleva img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/*Section*/
+
+.info .container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: -65px;
+}
+
+.infoText {
+    padding-top: 20px;
+    color: black;
+}
+
+.infoText p {
+    padding-bottom: 20px;
+    
+}
+
+.btn, .tlacitka a {
+    color: white;
+    background: rgba(15, 56, 38, 1);
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid rgba(15, 56, 38, 1);
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.infoSloupec:hover .btn, .btn:hover, .tlacitka a:hover {
+    background: transparent;
+    color: rgba(15, 56, 38, 1);
+}
+
+.infoSloupec:hover img {
+    scale: 1.1;
+}
+
+@media screen and (max-width: 1050px) {
+    .infoSloupec {
+        width: 32%;
+    }
+    .infoSloupec img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 800px) { 
+    .info .container {
+        flex-direction: column;
+        position: unset;
+        padding: 100px 0;
+    }
+    .infoSloupec {
+        width: 100%;
+        display: flex;
+        text-align: center;
+        align-items: center;
+    }
+    .infoSloupec img, .infoText {
+        width: 50%;
+    }
+    .infoText {
+        padding: 5px;
+    }
+    .infoSloupec:nth-of-type(2) {
+        flex-direction: row-reverse;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .infoSloupec,
+    .infoSloupec:nth-of-type(2) {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .infoText {
+        padding: 0;
+        width: 100%;
+    }
+    .info .container {
+        padding: 50px 0;
+        gap: 60px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .headerSleva h2 {
+        font-size: 7vw;
+    }
+}
+
+.promo .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 0;
+}
+
+.promo h1 {
+    font-size: 33px;
+    text-align: right;
+    width: 330px;
+    line-height: 1;
+}
+
+.promo p {
+    width: 740px;
+}
+
+.promo p a:hover,
+.pataBox p a:hover, 
+.copy p a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1165px) {
+    .promo h1 {
+        width: 25%;
+    }
+    .promo p {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .promo .container {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .promo h1, .promo p {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/*Footer*/
+
+.pata {
+    background: rgba(15, 56, 38, 1);
+    color: white;
+    padding: 45px 0px;
+}
+
+.pata .container {
+    display: flex;
+    gap: 80px;
+}
+
+.pata h2 {
+    padding-bottom: 30px;
+}
+
+.pata .ig {
+    display: flex;
+}
+
+.pataBox input[type="email"]  {
+    padding: 10px;
+    border-radius: 5px;
+    width: 310px;
+    font-size: 16px;
+    border: none;
+}
+
+.pataBox input[type="submit"] {
+    background-color: #A58150;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    margin-left: -10px;
+}
+
+.pataBox input[type="submit"]:hover {
+    background: #be9864;
+    cursor: pointer;
+}
+
+.pata p {
+    font-size: 12px;
+    padding-top: 15px;
+    width: 220px;
+}
+
+.copy .container{
+    padding: 30px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.copy p {
+    font-size: 12px;
+    padding-bottom: 6px;
+}
+
+.copyR p  {
+    font-weight: 700;
+}
+
+.copyR {
+    display: flex;
+    gap: 15px;
+}
+
+.copyR p i {
+    font-size: 20px;
+    color: black;
+}
+
+.fa-facebook:hover{
+    color: #1877F2;
+}
+
+.fa-instagram:hover{
+    color: #E4405F;
+}
+
+@media screen and (max-width: 1050px) {
+    .ig img {
+        width: 25%;
+        height: auto;
+    }
+    .pataBox input[type="email"] {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .pata .container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .pata h2 {
+        font-size: 6vw;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .copy .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 5px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .copyR {
+        flex-direction: column;
+    }
+    .copyL p:nth-of-type(2) {
+        display: flex;
+        flex-direction: column;
+    }
+    .copyL p span {
+        display: none;
+    }
+}
+
+/*404*/
+
+.error {
+    position: relative;
+    text-align: center;
+    align-items: center;
+}
+
+.error h1 {
+    padding-bottom: 50px;
+    color: rgb(255, 255, 255);
+}
+
+.error .btn {
+        color: white;
+        background: rgb(0, 0, 0);
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: 1px solid rgb(255, 255, 255);
+        display: inline-block;
+}
+
+.error .btn:hover {
+    background: transparent;
+    color: rgb(255, 255, 255, 1);
+}
+
+
+/*Kontakt*/
+
+.line {
+    border-top: 1px dotted #9E9E9E;
+    flex-grow: .9;
+}
+
+.nadpis {
+    padding: 65px 0;
+}
+
+.nadpis p {
+    font-size: 16px;
+    padding-bottom: 6px;
+}
+
+.nadpisStranky {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kontakt {
+    padding: 25px 0 270px;
+}
+
+.kontaktFlex {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 40px;
+    align-items: center;
+}
+
+.kontaktFlex .headerTel, 
+.nadpisStranky .headerTel {
+    color: black;
+    font-size: 44px;
+}
+
+.kontaktFlex .headerTel:hover, 
+.nadpisStranky .headerTel:hover {
+    color: #A58150;
+}
+
+.kontakt p {
+    line-height: 1.5;
+}
+
+.kontakt p span {
+    padding: 0 30px;
+}
+
+.big {
+    height: 530px;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+.big iframe {
+    position: absolute;
+    top: -232px;
+    right: 5%;
+    left: 5%;
+    width: 90%;
+    height: 486px;
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgb(0, 0, 0, 0.3);
+}
+
+.info.posun .container{
+    top: -171px;
+    height: 370px;
+}
+
+@media screen and (max-width: 900px) {
+    .kontaktFlex{
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    .kontakt p span {
+        display: block;
+        padding: 0;
+    }
+    .kontakt {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .nadpisStranky {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .nadpis {
+        text-align: center;
+    }
+    .kontaktFlex .headerTel {
+        font-size: 27px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .info.posun .container{
+        height: 100%;
+        padding: 50px 0;
+    }
+    .white.big {
+        height: 296px;
+    }
+}
+
+/*Rezervace*/
+
+.small {
+    height: 240px;
+}
+
+.rezervace .container {
+    padding: 100px 68px;
+    color: rgba(111, 116, 130, 1)
+}
+
+.rezervace label {
+    width: 46%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.rezervaceFlex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.rezervaceFlex input {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    font-size: 16px;
+    width: 100%;
+}
+
+.rezervaceFlex input::placeholder {
+    color: rgba(184, 188, 202, 1);
+}
+
+.rezervace p {
+    font-size: 16px;
+    padding: 30px 0;
+    width: 46%;
+}
+
+.rezervace p a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 800px) {
+    .small {
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .rezervace label,
+    .rezervace p {
+        width: 100%;
+    }
+    .nadpisStranky .headerTel {
+        font-size: 27px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .rezervace .container {
+        padding: 50px 0;
+    }
+}
+
+/*Děkujeme*/
+
+.center {
+    text-align: center;
+}
+
+.center .nadpisStranky {
+    justify-content: center;
+}
+
+.dekujeme {
+    text-align: center;
+    padding: 100px 0;
+}
+
+.bigText {
+    font-size: 135px;
+    color: rgba(15, 56, 38, 1);
+    text-transform: uppercase;
+}
+
+.dekujeme p b{
+    padding: 60px 0 10px;
+    display: block;
+}
+
+.dekujeme p a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 800px) {
+    .dekujeme .bigText {
+        font-size: 16vw;
+    }
+}
+
+/*Pražená káva*/
+.nadpisText {
+    width: 42%;
+}
+
+@media screen and (max-width: 700px) {
+    .nadpisText {
+        width: 90%;
+    }
+}
+
+/*Novinky*/
+
+.novinkyFlex {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5%;
+}
+
+.obr-blog {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    gap: 20px;
+    font-size: 28px;
+    font-weight: 800;
+    padding-bottom: 50px;
+    text-align: center
+}
+
+.obr-blog img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+}
+
+.novinky .container {
+    padding: 100px 0 30px;
+}
+
+.obr-blog:hover {
+    color: #A58150;
+}
+
+.obr-blog:hover img {
+    scale: 1.1;
+}
+
+.tlacitka {
+    position: relative;
+    bottom: 30px;
+    text-align: center;
+}
+
+/*Single*/
+
+.nadpisPrispevek {
+    color: black;
+    padding-bottom: 6px;
+}
+
+.nadpisPrispevek:hover {
+    color: #A58150;
+    text-decoration: underline;
+}
+
+.datumPrispevku {
+    padding-bottom: 30px;
+}
+
+.datumPrispevku span {
+    padding-right: 50px;
+}
+
+.datumPrispevku i {
+    margin-right: 5px;
+}
+
+.datumPrispevku a{
+    font-weight: 700;
+    color: gray;
+}
+
+.datumPrispevku a:hover{
+    text-decoration: underline;
+}
+
+.prispevek {
+    padding: 100px 0;
+}
+
+.prispevek h2 {
+    text-align: center;
+    padding: 25px 0;
+    border-bottom: 1px solid black;
+    margin: 0 auto 25px;
+    width: 50%;
+}
+
+.prispevek h3 {
+    padding: 15px 0;
+}
+.prispevek p {
+    padding: 8px 0;
+}
+.prispevek ul li {
+    margin-left: 30px;
+}
+.prispevek ol li {
+    padding-left: 30px;
+}
+.prispevek li {
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+.prispevek .tlacitka {
+    bottom: -30px;
+}
+
+@media screen and (max-width: 750px) {
+    .obr-blog {
+        width: 47%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .obr-blog {
+        width: 100%;
+    }
+
+    .novinkyFlex {
+        gap: unset;
+    }
+}
+
+/*Category*/
+
+.nadpisStranky.cat {
+    padding-bottom: 15px;
+}
+
+.wp-block-search__input {
+    border-radius: 5px;
+}
+
+.widget .wp-block-search__button {
+    border-radius: 5px;
+    margin-left: 0;
+    border: 1px solid #949494;
+}
+
+.wp-block-search__button:hover {
+    background: transparent;
+}
+
+/*Search*/
+
+.nenalezeno {
+    padding: 70px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nenalezeno p {
+    padding: 50px 0 25px;
+}
+
+.nenalezeno .widget {
+    width: 50%;
+    margin: auto;
+}
+@media screen and (max-width: 500px) {
+    .nenalezeno,
+    .nenalezeno .widget  {
+        width: 95%;
+        margin: auto;
+    }
+}

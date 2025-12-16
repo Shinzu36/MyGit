@@ -1,0 +1,90 @@
+.moving-image { 
+    position: absolute;
+    height: 300px;
+    width: auto;
+    padding-top: 200px;
+    left: 250px; /* Starting position */
+    animation: moveBackAndForth 5s linear infinite, flipImage 5s infinite;
+}
+
+.wally {
+    position: absolute;
+    height: 450px;
+    width: auto;
+    padding-top: 232px;
+    left: 29%;
+}
+
+body {
+    background: url(ring.jpg) no-repeat right center;
+    position: relative;
+    background-position: center;
+    padding-bottom: 500px;
+    background-size: cover;
+}
+
+/* Default animation for larger screens */
+@keyframes moveBackAndForth {
+    0% {
+        left: 300px;
+    }
+    50% {
+        left: 1300px; /* Move to the far right */
+    }
+    100% {
+        left: 300px; /* Move back to the far left */
+    }
+}
+@keyframes flipImage {
+    0% {
+        transform: scaleX(-1); /* Normal orientation */
+    }
+    24% {
+        transform: scaleX(-1); /* Normal orientation */
+    }
+    25% {
+        transform: scaleX(1); /* Flip horizontally at 25% */
+    }
+    74% {
+        transform: scaleX(1); /* Flip horizontally at 25% */
+    }
+    75% {
+        transform: scaleX(-1); /* Flip horizontally at 25% */
+    }
+    100% {
+        transform: scaleX(-1); /* Stay flipped */
+    }
+}
+/* Responsive styles */
+@media only screen and (max-width: 400px) {
+    
+    body {
+        background-position: right top;
+        background-size: contain;
+    }
+    
+    .moving-image {
+        height: 55px; /* Smaller height for smaller screens */
+        padding-top: 75px; /* Adjust padding-top for better positioning */
+        left: 75px; /* Adjust starting position for smaller screens */
+    }
+    
+    .wally {
+        height: 90px;
+        padding-top: 79px;
+        left: 30%;
+    }
+    
+    @keyframes moveBackAndForth {
+        0% {
+            left: 75px;
+        }
+        50% {
+            left: 260px; /* Move to the far right, considering the image width */
+        }
+        100% {
+            left: 75px; /* Move back to the far left */
+        }
+    }
+}
+

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Wordle Česky — Vylepšené</title>
+  <style>
+    :root {
+      --correct: #6aaa64;
+      --present: #c9b458;
+      --absent: #787c7e;
+      --default-border: #d3d6da;
+      --default-bg: #ffffff;
+    }
+
+    body {
+      background-color: #f3f3f3;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 2em;
+      color: #333;
+    }
+
+    #score {
+      margin: 10px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    #timer {
+      margin: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #d33; /* Červená barva pro časovač */
+    }
+
+    .grid {
+      display: grid;
+      /* Tato hodnota bude dynamicky nastavena JS */
+      grid-template-columns: repeat(var(--word-length, 5), 60px);
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .cell {
+      width: 60px;
+      height: 60px;
+      border: 2px solid var(--default-border);
+      background-color: var(--default-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.5s, border-color 0.5s;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transform-style: preserve-3d;
+      perspective: 600px;
+    }
+
+    .cell.flip {
+      animation: flip 0.6s ease forwards;
+    }
+
+    @keyframes flip {
+      0% { transform: rotateX(0); }
+      50% { transform: rotateX(90deg); background-color: var(--default-bg); }
+      100% { transform: rotateX(0deg); }
+    }
+
+    .correct {
+      background-color: var(--correct);
+      border-color: var(--correct);
+      color: white;
+    }
+
+    .present {
+      background-color: var(--present);
+      border-color: var(--present);
+      color: white;
+    }
+
+    .absent {
+      background-color: var(--absent);
+      border-color: var(--absent);
+      color: white;
+    }
+
+    .keyboard {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(30px, 1fr));
+      gap: 6px;
+      max-width: 500px;
+      margin-top: 20px;
+    }
+
+    .key {
+      background-color: #d3d6da;
+      border: none;
+      border-radius: 5px;
+      height: 45px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      transition: background-color 0.3s;
+      text-transform: uppercase;
+    }
+
+    .key.correct { background-color: var(--correct); color: white; }
+    .key.present { background-color: var(--present); color: white; }
+    .key.absent { background-color: var(--absent); color: white; }
+
+    #restart {
+      margin-top: 25px;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+      display: none;
+      transition: background-color 0.3s;
+    }
+    #restart:hover {
+      background-color: #45a049;
+    }
+
+  </style>
+</head>
+<body>
+<h1>Wordle Česky</h1>
+<div id="score">Výhry: 0 | Prohry: 0</div>
+<div id="timer"></div>
+<div id="game"></div>
+<div class="keyboard" id="keyboard"></div>
+<button id="restart" onclick="startGame()">
+  Hrát znovu
+</button>
+
+<script>
+  const WORDS_BY_LENGTH = {
+    4: ["NOSY", "MÁLO", "DUHA", "RUKA", "NOHA", "UCHO", "LÍPA", "SRDCE", "RYBA", "VLAK", "ZIMA", "JARO", "LÉTO", "KRÁVA", "MASO", "DORT", "CUKR"],
+    5: [
+      "ŽÁRLI", "ČESKY", "PĚTKA", "BIZON", "BLÁTO", "ÚKLID", "BOBEK", "TÁBOR", "ŮDOLÍ", "ČÁSTI",
+      "BŘEHY", "TŘÍDA", "BUDÍK", "SÍDLO", "TĚŽKO", "HŘÍCH", "PRÁCE", "ŘÍJEN", "ÚSMĚV", "MÍSTO",
+      "GULÁŠ", "HÁČEK", "VSTUP", "ZÁPAS", "KAKAO", "KOLÍK", "KLOUB", "ZÁVOD", "LAMPA", "TEPLO",
+      "LOVEC", "BŮČEK", "BERAN", "KOLOS", "LÉKAŘ", "MOTÝL", "OBLAK", "PENÍZ", "RÁKOS", "SLOVO",
+      "TOPOL", "TRÁVA", "VĚNEC", "VÝVOJ", "ŽELVA", "CHLÉB", "MRKEV", "VĚJÍŘ", "ŠKODA", "MOUKA"
+    ],
+    6: ["JABLKO", "POČASÍ", "ÚSPĚCH", "POKROK", "SLOUPY", "ŠKOLKA", "VEČEŘE", 
+        "DĚTSKÝ", "PARNÍK", "CIBULE", "FOTBAL", "HODINY", "ŠEPTEM"],
+    7: ["LETECKY", "KLOBOUK", "POLIBEK", "SKOŘICE", 
+        "NÁBYTEK", "POČÍTAČ", "ČASOPIS", "TRUHLÍK",
+        "TELEFON", "ZAHRADA", "BROUČEK", "ČERVENÝ"]
+  };
+  const CZ_LETTERS = "AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ";
+
+  const TIME_LIMITS_BY_LENGTH = {
+    4: 90,  // 4 písmena = 60 sekund
+    5: 120,  // 5 písmen = 90 sekund
+    6: 150, // 6 písmen = 120 sekund
+    7: 180  // 7 písmen = 150 sekund
+  };
+
+  let word = "";
+  let wordLength = 0;
+  let maxTries = 6;
+  let currentTry = 0;
+  let currentGuess = "";
+  let wins = 0;
+  let losses = 0;
+  let timer; // Proměnná pro interval časovače
+  let timeLeft; // Zbývající čas
+
+  const gameDiv = document.getElementById("game");
+  const keyboardDiv = document.getElementById("keyboard");
+  const restartBtn = document.getElementById("restart");
+  const scoreDiv = document.getElementById("score");
+  const timerDiv = document.getElementById("timer");
+
+  function startGame() {
+    clearInterval(timer); // Zastavíme předchozí časovač, pokud existuje
+    const availableLengths = Object.keys(WORDS_BY_LENGTH);
+    wordLength = parseInt(availableLengths[Math.floor(Math.random() * availableLengths.length)]);
+    
+    const wordsOfSelectedLength = WORDS_BY_LENGTH[wordLength];
+    word = wordsOfSelectedLength[Math.floor(Math.random() * wordsOfSelectedLength.length)].toUpperCase();
+    
+    currentTry = 0;
+    currentGuess = "";
+    gameDiv.innerHTML = "";
+    keyboardDiv.innerHTML = "";
+    restartBtn.style.display = "none";
+
+    // Nastav CSS proměnnou pro dynamickou šířku mřížky
+    document.documentElement.style.setProperty('--word-length', wordLength);
+
+    for (let i = 0; i < maxTries; i++) {
+      const row = document.createElement("div");
+      row.className = "grid";
+      for (let j = 0; j < wordLength; j++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        row.appendChild(cell);
+      }
+      gameDiv.appendChild(row);
+    }
+
+    for (let char of CZ_LETTERS) {
+      const key = document.createElement("div");
+      key.className = "key";
+      key.id = `key-${char}`;
+      key.textContent = char;
+      key.onclick = () => handleKey(char);
+      keyboardDiv.appendChild(key);
+    }
+
+    addSpecialKeys();
+    startTimer(); // Spustíme časovač
+  }
+
+  function addSpecialKeys() {
+    const enter = document.createElement("div");
+    enter.className = "key";
+    enter.style.gridColumn = "span 2";
+    enter.textContent = "↵";
+    enter.onclick = () => checkGuess();
+    keyboardDiv.appendChild(enter);
+
+    const del = document.createElement("div");
+    del.className = "key";
+    del.style.gridColumn = "span 2";
+    del.textContent = "⌫";
+    del.onclick = () => handleBackspace();
+    keyboardDiv.appendChild(del);
+  }
+
+  function handleKey(letter) {
+    if (currentGuess.length < wordLength) {
+      currentGuess += letter;
+      updateRow();
+    }
+  }
+
+  function handleBackspace() {
+    currentGuess = currentGuess.slice(0, -1);
+    updateRow();
+  }
+
+  function updateRow() {
+    const row = gameDiv.children[currentTry];
+    for (let i = 0; i < wordLength; i++) {
+      const cell = row.children[i];
+      cell.textContent = currentGuess[i] || "";
+    }
+  }
+
+  function checkGuess() {
+    if (currentGuess.length !== wordLength) {
+      alert(`Slovo musí mít ${wordLength} písmen!`);
+      return;
+    }
+
+    const row = gameDiv.children[currentTry];
+    const wordArray = word.split('');
+    const guessArray = currentGuess.split('');
+
+    for (let i = 0; i < wordLength; i++) {
+      const cell = row.children[i];
+      cell.classList.add("flip");
+    }
+
+    setTimeout(() => {
+      for (let i = 0; i < wordLength; i++) {
+        const cell = row.children[i];
+        if (guessArray[i] === word[i]) {
+          cell.classList.add("correct");
+          updateKeyboard(guessArray[i], "correct");
+          wordArray[i] = null;
+          guessArray[i] = null;
+        }
+      }
+
+      for (let i = 0; i < wordLength; i++) {
+        const cell = row.children[i];
+        if (guessArray[i] === null) continue;
+        if (wordArray.includes(guessArray[i])) {
+          cell.classList.add("present");
+          updateKeyboard(guessArray[i], "present");
+          wordArray[wordArray.indexOf(guessArray[i])] = null;
+        } else {
+          cell.classList.add("absent");
+          updateKeyboard(guessArray[i], "absent");
+        }
+      }
+
+      if (currentGuess === word) {
+        wins++;
+        updateScore();
+        clearInterval(timer); // Zastavíme časovač při výhře
+        setTimeout(() => {
+          alert("🎉 Výborně! Uhodl jsi slovo!");
+          restartBtn.style.display = "block";
+        }, 300);
+        return;
+      }
+
+      currentTry++;
+      currentGuess = "";
+
+      if (currentTry === maxTries) {
+        losses++;
+        updateScore();
+        clearInterval(timer); // Zastavíme časovač při prohře
+        setTimeout(() => {
+          alert(`😢 Neuhodl jsi! Správné slovo bylo: ${word}`);
+          restartBtn.style.display = "block";
+        }, 300);
+      }
+    }, 300);
+  }
+
+  function updateKeyboard(letter, status) {
+    const key = document.getElementById(`key-${letter}`);
+    if (!key) return;
+    const current = key.className;
+
+    if (status === "correct" ||
+        (status === "present" && !current.includes("correct")) ||
+        (status === "absent" && !current.includes("correct") && !current.includes("present"))) {
+      key.className = "key " + status;
+    }
+  }
+
+  function updateScore() {
+    scoreDiv.textContent = `Výhry: ${wins} | Prohry: ${losses}`;
+  }
+
+  function startTimer() {
+    timeLeft = TIME_LIMITS_BY_LENGTH[wordLength];
+    timerDiv.textContent = `Čas: ${timeLeft}s`;
+
+    timer = setInterval(() => {
+      timeLeft--;
+      timerDiv.textContent = `Čas: ${timeLeft}s`;
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        losses++;
+        updateScore();
+        alert(`😢 Čas vypršel! Správné slovo bylo: ${word}`);
+        restartBtn.style.display = "block";
+      }
+    }, 1000);
+  }
+
+  document.addEventListener("keydown", (e) => {
+    const k = e.key.toUpperCase();
+    // Zabraň hře po konci hry nebo vypršení času
+    if (restartBtn.style.display === "block" || timeLeft <= 0) return; 
+
+    if (k === "ENTER") checkGuess();
+    else if (k === "BACKSPACE") handleBackspace();
+    else if (CZ_LETTERS.includes(k)) handleKey(k);
+  });
+
+  startGame();
+</script>
+
+</body>
+</html>
